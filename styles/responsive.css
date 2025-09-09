@@ -1,0 +1,378 @@
+/* Mobile First Responsive Design for Sydney Chiropractor */
+
+/* ==========================================================================
+   BASE MOBILE STYLES (320px and up)
+   ========================================================================== */
+
+/* Base mobile adjustments already handled in main.css */
+
+/* ==========================================================================
+   SMALL MOBILE STYLES (480px and down)
+   ========================================================================== */
+
+@media screen and (max-width: 480px) {
+  :root {
+    --spacing-sm: 0.75rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-xxl: 2.5rem;
+  }
+
+  /* Header adjustments for very small screens */
+  .main-header {
+    height: 70px;
+  }
+  
+  .main-header.shrunk {
+    height: 60px;
+  }
+  
+  .header-content {
+    height: 70px;
+    padding: 0 var(--spacing-sm);
+  }
+  
+  .logo-placeholder {
+    width: 60px;
+    height: 60px;
+  }
+
+  /* Hero section for small screens */
+  .hero-section {
+    padding-top: 70px;
+    min-height: 60vh;
+    padding-left: var(--spacing-sm);
+    padding-right: var(--spacing-sm);
+  }
+  
+  .hero-image-placeholder {
+    max-width: 90vw;
+  }
+
+  /* Typography scaling for small screens */
+  .dr-leung-text h2,
+  .first-visit-section h2,
+  .contact-details h3 {
+    font-size: clamp(1.5rem, 6vw, 2.2rem);
+    line-height: 1.2;
+  }
+
+  .dr-leung-text p {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  /* Accordion improvements */
+  .accordion-header {
+    padding: var(--spacing-sm);
+  }
+
+  .accordion-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .accordion-content p {
+    padding: 0 var(--spacing-sm) var(--spacing-sm);
+    font-size: 0.95rem;
+  }
+
+  /* Images for small screens */
+  .doctor-image-placeholder {
+    max-width: 280px;
+  }
+
+  .clinic-image-placeholder {
+    max-width: 250px;
+  }
+
+  /* Contact details */
+  .contact-details p {
+    font-size: 0.9rem;
+  }
+
+  /* Footer adjustments */
+  .footer-banner {
+    height: 180px;
+    padding: var(--spacing-md) 0;
+  }
+  
+  .footer-logo-placeholder {
+    width: 200px;
+    height: 90px;
+  }
+  
+  .footer-copyright p {
+    font-size: 0.8rem;
+  }
+}
+
+/* ==========================================================================
+   TABLET PORTRAIT STYLES (481px to 768px)
+   ========================================================================== */
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  :root {
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 2.5rem;
+    --spacing-xxl: 3rem;
+  }
+
+  /* Header for tablet */
+  .header-content {
+    padding: 0 var(--spacing-md);
+  }
+
+  /* Hero adjustments */
+  .hero-section {
+    min-height: 80vh;
+  }
+  
+  .hero-image-placeholder {
+    max-width: 85vw;
+  }
+
+  /* Better spacing for tablet */
+  .dr-leung-text,
+  .contact-text {
+    padding: var(--spacing-md);
+  }
+  
+  /* Images for tablet */
+  .doctor-image-placeholder {
+    max-width: 380px;
+  }
+
+  .clinic-image-placeholder {
+    max-width: 290px;
+  }
+}
+
+/* ==========================================================================
+   TABLET LANDSCAPE / SMALL DESKTOP (769px to 1024px)
+   ========================================================================== */
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  /* Navigation adjustments */
+  .mobile-menu-toggle {
+    display: none;
+  }
+  
+  .main-nav {
+    position: static;
+    flex-direction: row;
+    background: none;
+    box-shadow: none;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    padding: 0;
+    margin-left: var(--spacing-md);
+  }
+  
+  .nav-link {
+    padding: 0;
+    border-bottom: none;
+    font-size: 1.1rem;
+  }
+  
+  .mobile-phone-link {
+    display: none;
+  }
+  
+  .desktop-only {
+    display: flex;
+  }
+
+  /* Hero section */
+  .hero-section {
+    padding-top: 245px;
+    min-height: 90vh;
+  }
+  
+  .hero-image-container {
+    margin-top: -220px;
+  }
+  
+  .hero-image-placeholder {
+    width: min(1200px, 90%);
+  }
+
+  /* Content sections */
+  .dr-leung-container {
+    flex-direction: row;
+    gap: var(--spacing-lg);
+  }
+  
+  .dr-leung-image {
+    margin-left: 40px;
+  }
+  
+  .doctor-image-placeholder {
+    width: min(380px, 100%);
+  }
+
+  /* Contact section */
+  .contact-grid {
+    flex-direction: row;
+    gap: var(--spacing-lg);
+    margin: 0 auto;
+  }
+  
+  .clinic-image-placeholder {
+    width: min(280px, 100%);
+  }
+}
+
+/* ==========================================================================
+   DESKTOP STYLES (1025px to 1200px)
+   ========================================================================== */
+
+@media screen and (min-width: 1025px) and (max-width: 1200px) {
+  /* Logo positioning */
+  .logo-container {
+    margin-left: 30px;
+  }
+  
+  .dr-leung-image {
+    margin-left: 50px;
+  }
+
+  /* Content adjustments */
+  .contact-grid {
+    gap: var(--spacing-xl);
+  }
+}
+
+/* ==========================================================================
+   LARGE DESKTOP STYLES (1201px and up)
+   ========================================================================== */
+
+@media screen and (min-width: 1201px) {
+  /* Full desktop layout */
+  .dr-leung-image {
+    margin-left: 71px;
+  }
+
+  .contact-grid {
+    gap: var(--spacing-xl);
+    max-width: 1100px;
+  }
+
+  .doctor-image-placeholder {
+    width: 420px;
+    height: auto;
+  }
+
+  .clinic-image-placeholder {
+    width: 305px;
+    height: auto;
+  }
+}
+
+/* ==========================================================================
+   TOUCH AND INTERACTION IMPROVEMENTS
+   ========================================================================== */
+
+@media (hover: none) and (pointer: coarse) {
+  /* Touch-friendly adjustments */
+  .nav-link,
+  .accordion-header,
+  .mobile-menu-toggle {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .accordion-header {
+    padding: var(--spacing-md) 0;
+  }
+  
+  .mobile-menu-toggle {
+    min-width: 44px;
+  }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY AND PERFORMANCE
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .hero-section {
+    background-attachment: scroll;
+  }
+  
+  .fade-in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  :root {
+    --color-primary: #000080;
+    --color-text-light: #333333;
+    --color-border: #666666;
+  }
+
+  .accordion-item {
+    border: 2px solid var(--color-border);
+  }
+  
+  .hamburger-line {
+    background-color: #000000;
+  }
+  
+  .main-nav {
+    border: 2px solid var(--color-border);
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-main: #1a1a1a;
+    --color-nav: #2d2d2d;
+    --color-white: #2d2d2d;
+    --color-text-dark: #e0e0e0;
+    --color-text-light: #b0b0b0;
+    --color-border: #404040;
+    --color-accent-light: #2a4a6b;
+  }
+  
+  .hamburger-line {
+    background-color: var(--color-text-dark);
+  }
+}
+
+/* ==========================================================================
+   PRINT STYLES
+   ========================================================================== */
+
+@media print {
+  .mobile-menu-toggle,
+  .main-nav,
+  .cta-phone-button,
+  .hero-section {
+    display: none;
+  }
+  
+  .main-header {
+    position: static;
+    height: auto;
+  }
+  
+  * {
+    background: white !important;
+    color: black !important;
+  }
+}
