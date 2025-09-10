@@ -4,34 +4,13 @@
 (function() {
     'use strict';
 
-    // Sticky Header Shrinking Functionality
+    // Sticky Header Functionality (no shrinking)
     function initStickyHeader() {
         const header = document.getElementById('main-header');
         if (!header) return;
-
-        let ticking = false;
-        const shrinkThreshold = 50; // Pixels scrolled before shrinking
-
-        function updateHeader() {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (scrollTop > shrinkThreshold) {
-                header.classList.add('shrunk');
-            } else {
-                header.classList.remove('shrunk');
-            }
-            
-            ticking = false;
-        }
-
-        function requestTick() {
-            if (!ticking) {
-                requestAnimationFrame(updateHeader);
-                ticking = true;
-            }
-        }
-
-        window.addEventListener('scroll', requestTick, { passive: true });
+        
+        // Header stays at fixed height - no shrinking behavior
+        console.log('Sticky header initialized without shrinking');
     }
 
     // SIMPLE IMMEDIATE NAVIGATION - Works from landing page instantly

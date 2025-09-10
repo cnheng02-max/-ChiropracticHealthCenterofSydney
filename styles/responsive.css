@@ -41,9 +41,17 @@
   /* Hero section for small screens */
   .hero-section {
     padding-top: 70px;
-    min-height: 60vh;
+    min-height: 80vh;
+    background: linear-gradient(to bottom, #FEF9F6 25%, #D9D9D9 25%);
     padding-left: var(--spacing-sm);
     padding-right: var(--spacing-sm);
+  }
+  
+  .hero-picture-placeholder {
+    width: 90%;
+    height: 350px;
+    margin-bottom: var(--spacing-md);
+    font-size: 1rem;
   }
   
   .hero-image-placeholder {
@@ -126,7 +134,14 @@
 
   /* Hero adjustments */
   .hero-section {
-    min-height: 80vh;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #FEF9F6 25%, #D9D9D9 25%);
+  }
+  
+  .hero-picture-placeholder {
+    width: 85%;
+    height: 450px;
+    font-size: 1.1rem;
   }
   
   .hero-image-placeholder {
@@ -187,12 +202,19 @@
 
   /* Hero section */
   .hero-section {
-    padding-top: 245px;
-    min-height: 90vh;
+    padding-top: 122.5px;
+    min-height: 120vh;
+    background: linear-gradient(to bottom, #FEF9F6 25%, #D9D9D9 25%);
   }
   
   .hero-image-container {
-    margin-top: -220px;
+    margin-top: -97.5px;
+  }
+  
+  .hero-picture-placeholder {
+    width: min(1000px, 85%);
+    height: 650px;
+    font-size: 1.2rem;
   }
   
   .hero-image-placeholder {
