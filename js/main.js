@@ -57,7 +57,7 @@
         console.log('All navigation setup complete!');
     }
     
-    // Simple smooth scroll function
+    // Enhanced smooth scroll function with section-specific positioning
     function smoothScrollTo(targetId) {
         console.log('Scrolling to section:', targetId);
         
@@ -67,15 +67,34 @@
             return;
         }
         
-        // Get header height for proper positioning
+        // Get actual header height (should be 122.5px)
         const header = document.getElementById('main-header');
-        const headerHeight = header ? header.offsetHeight : 250;
+        const headerHeight = header ? header.offsetHeight : 122.5;
         
-        // Calculate scroll position
+        // Calculate base scroll position
         const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-        const scrollPosition = targetPosition - headerHeight - 20; // 20px buffer
         
-        console.log('Scrolling to position:', scrollPosition);
+        // Section-specific positioning logic
+        let scrollPosition;
+        
+        if (targetId === 'dr-leung') {
+            // Dr. Leung: Exact top alignment, no visible landing page
+            scrollPosition = targetPosition - headerHeight;
+            console.log('Dr. Leung section: exact top alignment');
+        } else if (targetId === 'contact') {
+            // Contact: Center the section in viewport
+            const viewportHeight = window.innerHeight;
+            const sectionHeight = targetElement.offsetHeight;
+            const centerOffset = (viewportHeight - sectionHeight) / 2;
+            scrollPosition = targetPosition - headerHeight - centerOffset + 50; // +50px for better visual centering
+            console.log('Contact section: centered in viewport');
+        } else {
+            // Default positioning for other sections
+            scrollPosition = targetPosition - headerHeight - 20;
+            console.log('Default section positioning');
+        }
+        
+        console.log('Header height:', headerHeight, 'Scrolling to position:', scrollPosition);
         
         // Smooth scroll
         window.scrollTo({
@@ -87,16 +106,30 @@
     // Enhanced Accordion functionality
     function initAccordion() {
         const accordionHeaders = document.querySelectorAll('.accordion-header');
+        console.log('Accordion initialization started. Found headers:', accordionHeaders.length);
         
-        accordionHeaders.forEach(header => {
+        if (accordionHeaders.length === 0) {
+            console.warn('No accordion headers found!');
+            return;
+        }
+        
+        accordionHeaders.forEach((header, index) => {
+            console.log(`Setting up accordion item ${index + 1}`);
             header.addEventListener('click', function() {
+                console.log('Accordion header clicked!');
                 const accordionItem = this.parentElement;
                 const targetId = accordionItem.dataset.target;
                 const content = document.getElementById(targetId);
                 
-                if (!content) return;
+                console.log('Target ID:', targetId, 'Content found:', !!content);
+                
+                if (!content) {
+                    console.error('Accordion content not found for target:', targetId);
+                    return;
+                }
 
                 const isActive = accordionItem.classList.contains('active');
+                console.log('Is currently active:', isActive);
                 
                 // Close all accordion items
                 accordionHeaders.forEach(otherHeader => {
@@ -112,17 +145,49 @@
 
                 // Toggle current item
                 if (!isActive) {
+                    console.log('Opening accordion item');
                     accordionItem.classList.add('active');
                     content.style.maxHeight = content.scrollHeight + 'px';
                 } else {
+                    console.log('Closing accordion item');
                     accordionItem.classList.remove('active');
                     content.style.maxHeight = '0';
                 }
             });
         });
+        
+        console.log('Accordion initialization completed successfully');
     }
 
-    // Navigation code removed - ready for fresh rebuild
+    // Mobile Menu Functionality
+    function initMobileMenu() {
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const mainNav = document.getElementById('main-nav');
+        
+        if (!mobileMenuToggle || !mainNav) {
+            console.log('Mobile menu elements not found, skipping mobile menu initialization');
+            return;
+        }
+
+        mobileMenuToggle.addEventListener('click', function() {
+            // Toggle active classes
+            mobileMenuToggle.classList.toggle('active');
+            mainNav.classList.toggle('active');
+            
+            console.log('Mobile menu toggled');
+        });
+
+        // Close mobile menu when clicking on nav links
+        const navLinks = mainNav.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuToggle.classList.remove('active');
+                mainNav.classList.remove('active');
+            });
+        });
+
+        console.log('Mobile menu initialized successfully');
+    }
 
     // Intersection Observer for fade-in animations
     function initScrollAnimations() {

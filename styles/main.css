@@ -285,14 +285,30 @@ body {
 /* Hero Content Container - for centered picture */
 .hero-content-container {
   position: relative;
-  z-index: 1500; /* Below hero image but above background */
+  z-index: 500; /* Behind navigation banner (z-index: 1000) */
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
+  margin-top: var(--spacing-lg);
   margin-bottom: var(--spacing-xl);
 }
 
+.hero-picture {
+  width: min(1230px, 90%);
+  height: 800px;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  transition: var(--transition-smooth);
+}
+
+.hero-picture:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Keep old selector for backwards compatibility */
 .hero-picture-placeholder {
   width: min(1230px, 90%);
   height: 800px;
@@ -368,6 +384,22 @@ body {
   flex-shrink: 0;
 }
 
+.doctor-image {
+  width: min(420px, 100%);
+  height: auto;
+  aspect-ratio: 420 / 470;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: var(--transition-smooth);
+}
+
+.doctor-image:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* Keep old selector for backwards compatibility */
 .doctor-image-placeholder {
   width: min(420px, 100%);
   height: auto;
@@ -584,7 +616,7 @@ body {
   gap: var(--spacing-xl);
   justify-content: center;
   margin: 0 auto;
-  max-width: 1100px;
+  max-width: 800px;
   width: 100%;
 }
 
