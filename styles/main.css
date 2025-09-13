@@ -294,6 +294,58 @@ body {
   margin-bottom: var(--spacing-xl);
 }
 
+/* Hero Title Overlay */
+.hero-title-overlay {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 600;
+  text-align: center;
+  width: 90%;
+  max-width: 600px;
+}
+
+.hero-title-overlay h1 {
+  font-family: var(--font-body);
+  font-size: 3.2rem;
+  font-weight: 600;
+  color: var(--color-white);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* Hero CTA Container */
+.hero-cta-container {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 600;
+}
+
+.hero-book-now-btn {
+  display: inline-block;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: 14px 32px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: var(--transition-smooth);
+  border: 2px solid var(--color-primary);
+}
+
+.hero-book-now-btn:hover {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
 .hero-picture {
   width: min(1230px, 90%);
   height: 800px;
@@ -360,6 +412,15 @@ body {
   .hero-image-placeholder {
     width: 100%;
     max-width: 95vw;
+  }
+  
+  .hero-title-overlay h1 {
+    font-size: 2.2rem;
+  }
+  
+  .hero-book-now-btn {
+    padding: 12px 24px;
+    font-size: 1rem;
   }
 }
 
@@ -644,7 +705,7 @@ body {
   font-family: var(--font-heading);
   font-size: 1.3rem;
   color: var(--color-primary);
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
   font-weight: 600;
 }
 
@@ -652,7 +713,7 @@ body {
   color: var(--color-text-light);
   font-size: 0.9rem;
   line-height: 1.5;
-  margin-bottom: var(--spacing-xs);
+  margin-bottom: var(--spacing-md);
 }
 
 .clinic-image {
