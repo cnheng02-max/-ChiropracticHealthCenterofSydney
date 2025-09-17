@@ -16,16 +16,18 @@
     // SIMPLE IMMEDIATE NAVIGATION - Works from landing page instantly
     function setupNavigation() {
         console.log('Setting up navigation immediately...');
-        
+
         // Get navigation elements
         const drLeungLink = document.querySelector('a[href="#dr-leung"]');
         const contactLink = document.querySelector('a[href="#contact"]');
         const phoneButton = document.querySelector('.cta-phone-button');
-        
+        const heroBookNowBtn = document.querySelector('.hero-book-now-btn');
+
         console.log('Dr. Leung link:', drLeungLink);
         console.log('Contact link:', contactLink);
         console.log('Phone button:', phoneButton);
-        
+        console.log('Hero Book Now button:', heroBookNowBtn);
+
         // Setup Dr. Leung navigation
         if (drLeungLink) {
             drLeungLink.addEventListener('click', function(e) {
@@ -35,17 +37,27 @@
             });
             console.log('Dr. Leung navigation ready');
         }
-        
-        // Setup Contact Us navigation  
+
+        // Setup Contact Us navigation (header link - centers in viewport)
         if (contactLink) {
             contactLink.addEventListener('click', function(e) {
                 e.preventDefault();
                 console.log('Contact Us clicked - navigating...');
-                smoothScrollTo('contact');
+                smoothScrollTo('contact', 'center');
             });
             console.log('Contact Us navigation ready');
         }
-        
+
+        // Setup Hero Book Now button (scrolls to top of contact section)
+        if (heroBookNowBtn) {
+            heroBookNowBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Hero Book Now clicked - navigating to top of contact...');
+                smoothScrollTo('contact', 'top');
+            });
+            console.log('Hero Book Now navigation ready');
+        }
+
         // Phone button already has tel: link - just log when clicked
         if (phoneButton) {
             phoneButton.addEventListener('click', function() {
@@ -53,49 +65,59 @@
             });
             console.log('Phone button ready');
         }
-        
+
         console.log('All navigation setup complete!');
     }
     
     // Enhanced smooth scroll function with section-specific positioning
-    function smoothScrollTo(targetId) {
-        console.log('Scrolling to section:', targetId);
-        
+    function smoothScrollTo(targetId, positioning = 'default') {
+        console.log('Scrolling to section:', targetId, 'with positioning:', positioning);
+
         const targetElement = document.getElementById(targetId);
         if (!targetElement) {
             console.error('Target section not found:', targetId);
             return;
         }
-        
+
         // Get actual header height (should be 122.5px)
         const header = document.getElementById('main-header');
         const headerHeight = header ? header.offsetHeight : 122.5;
-        
+
         // Calculate base scroll position
         const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-        
+
         // Section-specific positioning logic
         let scrollPosition;
-        
+
         if (targetId === 'dr-leung') {
             // Dr. Leung: Exact top alignment, no visible landing page
             scrollPosition = targetPosition - headerHeight;
             console.log('Dr. Leung section: exact top alignment');
         } else if (targetId === 'contact') {
-            // Contact: Center the section in viewport
-            const viewportHeight = window.innerHeight;
-            const sectionHeight = targetElement.offsetHeight;
-            const centerOffset = (viewportHeight - sectionHeight) / 2;
-            scrollPosition = targetPosition - headerHeight - centerOffset + 50; // +50px for better visual centering
-            console.log('Contact section: centered in viewport');
+            if (positioning === 'top') {
+                // Book Now button: Scroll to top of contact section
+                scrollPosition = targetPosition - headerHeight - 20; // Small offset for visual breathing room
+                console.log('Contact section: top alignment (Book Now button)');
+            } else if (positioning === 'center') {
+                // Header Contact link: Center the section in viewport
+                const viewportHeight = window.innerHeight;
+                const sectionHeight = targetElement.offsetHeight;
+                const centerOffset = (viewportHeight - sectionHeight) / 2;
+                scrollPosition = targetPosition - headerHeight - centerOffset + 50; // +50px for better visual centering
+                console.log('Contact section: centered in viewport (header link)');
+            } else {
+                // Default: top alignment
+                scrollPosition = targetPosition - headerHeight - 20;
+                console.log('Contact section: default top alignment');
+            }
         } else {
             // Default positioning for other sections
             scrollPosition = targetPosition - headerHeight - 20;
             console.log('Default section positioning');
         }
-        
+
         console.log('Header height:', headerHeight, 'Scrolling to position:', scrollPosition);
-        
+
         // Smooth scroll
         window.scrollTo({
             top: Math.max(0, scrollPosition),
@@ -207,7 +229,7 @@
         // Add fade-in class to sections and observe them
         const sections = [
             '.dr-leung-section',
-            '.first-visit-section', 
+            '.first-visit-section',
             '.location-section',
             '.contact-section'
         ];
@@ -219,6 +241,53 @@
                 observer.observe(element);
             }
         });
+
+        // Hero title fade out on scroll
+        initHeroTitleFadeOut();
+    }
+
+    // Hero title fade out animation based on scroll
+    function initHeroTitleFadeOut() {
+        const heroTitle = document.querySelector('.hero-title-overlay');
+        if (!heroTitle) {
+            console.log('Hero title not found for fade out animation');
+            return;
+        }
+
+        let hasTriggeredFadeOut = false;
+        const fadeOutThreshold = 200; // Start fade out after scrolling 200px
+
+        function handleScroll() {
+            // Skip if reduced motion is preferred
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                return;
+            }
+
+            const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollY > fadeOutThreshold && !hasTriggeredFadeOut) {
+                heroTitle.classList.add('fade-out');
+                hasTriggeredFadeOut = true;
+                console.log('Hero title fade out triggered at scroll position:', scrollY);
+            } else if (scrollY <= fadeOutThreshold && hasTriggeredFadeOut) {
+                heroTitle.classList.remove('fade-out');
+                hasTriggeredFadeOut = false;
+                console.log('Hero title fade out reversed at scroll position:', scrollY);
+            }
+        }
+
+        // Throttle scroll events for performance
+        let ticking = false;
+        function requestTick() {
+            if (!ticking) {
+                requestAnimationFrame(handleScroll);
+                ticking = true;
+                setTimeout(() => { ticking = false; }, 16); // ~60fps
+            }
+        }
+
+        window.addEventListener('scroll', requestTick, { passive: true });
+        console.log('Hero title fade out animation initialized');
     }
 
     // Performance optimization: Debounce function

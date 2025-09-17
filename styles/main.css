@@ -320,13 +320,13 @@ body {
   transform: translateX(-50%);
   z-index: 600;
   text-align: center;
-  width: 90%;
-  max-width: 600px;
+  width: 100%;
+  max-width: 1000px;
 }
 
 .hero-title-overlay h1 {
   font-family: var(--font-body);
-  font-size: 3.2rem;
+  font-size: 4.2rem;
   font-weight: 600;
   color: var(--color-white);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
@@ -342,6 +342,21 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes hero-title-fade-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+.hero-title-overlay.fade-out h1 {
+  animation: hero-title-fade-out 0.4s ease-out forwards;
 }
 
 /* Hero CTA Container */
@@ -443,7 +458,7 @@ body {
   }
   
   .hero-title-overlay h1 {
-    font-size: 2.2rem;
+    font-size: 2.8rem;
   }
   
   .hero-book-now-btn {
@@ -824,7 +839,7 @@ body {
 /* Bottom Navigation Banner */
 .footer-banner {
   width: 100%;
-  height: 232px;
+  height: 150px;
   background-color: var(--color-main);
   display: flex;
   flex-direction: column;
@@ -847,15 +862,15 @@ body {
 
 .footer-logo {
   position: absolute;
-  top: 50%;
+  top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
 .footer-logo-placeholder {
-  width: 288px;
-  height: 130px;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 288 130"><rect fill="transparent" width="288" height="130" stroke="%23e8eaed" stroke-width="2"/><circle cx="144" cy="45" r="25" fill="%23ebf3fd"/><rect x="119" y="70" width="50" height="40" rx="20" fill="%23f8f9fa"/><text x="144" y="120" text-anchor="middle" fill="%235d6d7e" font-family="Arial" font-size="12">Footer Logo</text><text x="144" y="125" text-anchor="middle" fill="%232c3e50" font-family="Arial" font-size="8">288x130</text></svg>');
+  width: 180px;
+  height: 80px;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 80"><rect fill="transparent" width="180" height="80" stroke="%23e8eaed" stroke-width="2"/><circle cx="90" cy="30" r="15" fill="%23ebf3fd"/><rect x="75" y="45" width="30" height="25" rx="12" fill="%23f8f9fa"/><text x="90" y="75" text-anchor="middle" fill="%235d6d7e" font-family="Arial" font-size="8">Footer Logo</text></svg>');
   background-size: contain;
   background-repeat: no-repeat;
   border-radius: var(--border-radius);
