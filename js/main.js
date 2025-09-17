@@ -244,6 +244,9 @@
 
         // Hero title fade out on scroll
         initHeroTitleFadeOut();
+
+        // Accordion sequential animation
+        initAccordionSequentialAnimation();
     }
 
     // Hero title fade out animation based on scroll
@@ -288,6 +291,59 @@
 
         window.addEventListener('scroll', requestTick, { passive: true });
         console.log('Hero title fade out animation initialized');
+    }
+
+    // Accordion sequential animation on scroll
+    function initAccordionSequentialAnimation() {
+        const firstVisitSection = document.querySelector('.first-visit-section');
+        const accordionItems = document.querySelectorAll('.first-visit-section .accordion-item');
+
+        if (!firstVisitSection || accordionItems.length === 0) {
+            console.log('First visit section or accordion items not found for sequential animation');
+            return;
+        }
+
+        // Add fade-in-item class to all accordion items initially
+        accordionItems.forEach(item => {
+            item.classList.add('fade-in-item');
+        });
+
+        let hasTriggered = false;
+
+        const observerOptions = {
+            threshold: 0.3, // Trigger when 30% of section is visible
+            rootMargin: '0px 0px -100px 0px' // Trigger a bit before section is fully in view
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !hasTriggered) {
+                    hasTriggered = true;
+                    console.log('First visit section in view - triggering accordion animation');
+
+                    // Skip if reduced motion is preferred
+                    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                        // Just show all items immediately
+                        accordionItems.forEach(item => {
+                            item.classList.add('visible');
+                        });
+                        console.log('Reduced motion: showing all accordion items immediately');
+                        return;
+                    }
+
+                    // Trigger sequential animation with a slight initial delay
+                    setTimeout(() => {
+                        accordionItems.forEach(item => {
+                            item.classList.add('visible');
+                        });
+                        console.log('Sequential accordion animation triggered');
+                    }, 200); // Small delay after section comes into view
+                }
+            });
+        }, observerOptions);
+
+        observer.observe(firstVisitSection);
+        console.log('Accordion sequential animation observer initialized');
     }
 
     // Performance optimization: Debounce function
